@@ -27,10 +27,9 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         APP_ENV: testing
-      run: vendor/bin/phpunit --coverage-cobertura 
+      run: vendor/bin/phpunit --coverage-text=coverage.txt
     - name: Gather code coverage
       uses: actions/upload-artifact@v3
-      run: vendor/bin/phpunit --coverage-text=coverage.txt
       with: 
         name: code-coverage-report
         path: coverage.txt
