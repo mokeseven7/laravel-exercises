@@ -1,0 +1,71 @@
+openapi: 3.0.0
+paths:
+  /api/deedee:
+    get:
+      tags:
+        - characters
+      summary: 'Returns a paginated collection of deedees'
+      description: 'Returns stuff'
+      operationId: index
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: integer
+                  format: int32
+    post:
+      tags:
+        - characters
+      summary: 'Create A New Deedee'
+      operationId: store
+      requestBody:
+        description: 'creating a dee dee'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeeDee'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeeDee'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DeeDee'
+  '/api/deedee/{deedeeId}':
+    get:
+      tags:
+        - characters
+      description: 'integer id of deedee entities'
+      operationId: getOrderById
+      parameters:
+        -
+          name: deedeeId
+          in: path
+          description: 'if of deedee'
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 10
+            minimum: 1
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DeeDee'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeeDee'
+        '400':
+          description: 'Invalid ID supplied'
+        '422':
+          description: 'Validation Failed'

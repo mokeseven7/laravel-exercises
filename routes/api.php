@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeeDeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/**
+ * For simple CRUD, the framework is opinionated, and makes all the boilerplate for you
+ * Running the following command with the a flag makes: Model, Controller, Seeder, Factory, Migration, Policy, Request Objects 
+ * 
+ * php artisan make:model <model_name> -a
+ * 
+ */ 
+
+Route::apiResource('deedee', DeeDeeController::class);
