@@ -3,3 +3,6 @@ install:
 
 db:
 	php artisan migrate:fresh && php artisan db:seed
+
+test: 
+	php artisan test --coverage

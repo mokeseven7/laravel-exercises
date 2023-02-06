@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\DeeDee;
 use App\Http\Requests\StoreDeeDeeRequest;
 use App\Http\Requests\UpdateDeeDeeRequest;
-use Illuminate\Http\Request;
-
 
 class DeeDeeController extends Controller
 {
@@ -18,19 +16,17 @@ class DeeDeeController extends Controller
 
     public function store(StoreDeeDeeRequest $request)
     {
-        $deedee = DeeDee::create($request->safe()->all());
-        return response()->json($deedee); 
+        return tap(DeeDee::create($request->safe()->all()), fn($deedee) => response()->json($deedee));
     }
 
-    public function show(Request $request, DeeDee $deedee)
+    public function show(DeeDee $deedee)
     {
         return response()->json($deedee);
     }
 
     public function update(UpdateDeeDeeRequest $request, DeeDee $deedee)
     {
-        $deedee->update($request->safe()->all());
-        return response()->json($deedee->refresh());
+        return tap($request->safe()->all(), fn($valid) => $deedee->update($valid) && response()->json($deedee->refresh()));
     }
 
     public function destroy(DeeDee $deedee)

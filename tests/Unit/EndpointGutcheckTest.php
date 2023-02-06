@@ -25,7 +25,7 @@ class EndpointGutcheckTest extends TestCase
 
     public function test_post_resource()
     {
-        $this->post('/api/deedee', DeeDee::factory()->create()->toArray())->assertStatus(200);
+        $this->post('/api/deedee', DeeDee::factory()->create()->toArray())->assertStatus(201);
     }
 
     public function test_put_resource()

@@ -49,7 +49,7 @@ class DeeDeeResourceTest extends TestCase
 
         $response = $this->postJson('/api/deedee', $deedee);
     
-        $response->assertStatus(200);
+        $response->assertStatus(201);
         $response->assertJson($deedee);
     }
 
@@ -67,7 +67,7 @@ class DeeDeeResourceTest extends TestCase
         $deedee = DeeDee::factory()->create();
         $deedee->surname = Str::reverse($deedee->surname);
         $response = $this->putJson("/api/deedee/$deedee->id", $deedee->toArray());
-      
+        
         $this->assertSame($response->json('surname'), $deedee->surname);
         
     }
